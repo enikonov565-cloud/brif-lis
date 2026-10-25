@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Бриф на фотосъёмку — Лисса Миляева</title>
+  <meta name="description" content="Короткая анкета перед фотосъёмкой: расскажите о задумке, и я подготовлюсь к встрече.">
+  <meta name="theme-color" content="#efdcc6">
+  <meta name="robots" content="noindex">
+  <link rel="preload" href="assets/fonts/InterLight.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/fonts/Wulkan-Display-Regular.otf" as="font" type="font/otf" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Перейти к содержимому</a>
+
+  <!-- Шапка: логотип, счётчик этапов, прогресс -->
+  <header class="top" id="top">
+    <div class="top__in">
+      <a class="brand" href="https://enikonov565-cloud.github.io/lisa/">Лисса Миляева</a>
+      <div class="top__meta">
+        <span class="saved" id="saved" aria-live="polite"></span>
+        <span class="counter" id="counter" hidden><b id="counterNow">01</b><span class="counter__sep">/</span><span id="counterAll">07</span></span>
+      </div>
+    </div>
+    <div class="progress" role="progressbar" aria-label="Заполнение брифа" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <span class="progress__bar" id="progressBar"></span>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- Интро -->
+    <section class="screen intro" id="intro" aria-labelledby="introTitle">
+      <div class="intro__in">
+        <div class="intro__lead">
+          <p class="eyebrow">бриф на фотосъёмку</p>
+          <h1 class="intro__title" id="introTitle" tabindex="-1">Расскажите о&nbsp;вашей съёмке</h1>
+          <p class="intro__text">Несколько коротких вопросов о&nbsp;задумке, настроении и&nbsp;деталях. По&nbsp;ответам я&nbsp;пойму, что вам важно, и&nbsp;приду на&nbsp;съёмку подготовленной.</p>
+        </div>
+        <div class="intro__card">
+          <ul class="facts">
+            <li><span class="facts__big" id="introSteps">7 этапов</span><span>по 3–5 вопросов на&nbsp;каждом экране</span></li>
+            <li><span class="facts__big">~10 минут</span><span>отвечайте своими словами, как в&nbsp;переписке</span></li>
+            <li><span class="facts__big">Черновик</span><span>сохраняется сам: можно закрыть вкладку и&nbsp;вернуться позже</span></li>
+          </ul>
+          <p class="intro__note">Вопросы со&nbsp;звёздочкой <span class="req">*</span> обязательные, остальные&nbsp;— по&nbsp;желанию.</p>
+          <button class="cta" type="button" id="startBtn">
+            <span class="cta__base" aria-hidden="true"></span>
+            <span class="cta__cap"><span class="cta__face"><span class="cta__label" id="startLabel">Начать</span><span class="cta__icon" aria-hidden="true">→</span></span></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Этапы анкеты: разметка вопросов создаётся в app.js из массива QUESTIONS -->
+    <form class="brief" id="brief" novalidate hidden>
+      <div class="stages" id="stages"></div>
+
+      <!-- Защита от ботов: поле скрыто от людей -->
+      <div class="hp" aria-hidden="true">
+        <label>Сайт <input type="text" name="website" id="hpWebsite" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <!-- Навигация: назад / точки / далее -->
+      <nav class="nav" aria-label="Этапы брифа">
+        <div class="nav__in">
+          <button class="btn-ghost nav__back" type="button" id="backBtn">
+            <span class="nav__arrow" aria-hidden="true">←</span><span class="nav__backText">Назад</span>
+          </button>
+          <ol class="dots" id="dots"></ol>
+          <button class="cta nav__next" type="button" id="nextBtn">
+            <span class="cta__base" aria-hidden="true"></span>
+            <span class="cta__cap"><span class="cta__face"><span class="cta__label" id="nextLabel">Далее</span><span class="cta__icon" aria-hidden="true">→</span></span></span>
+          </button>
+        </div>
+      </nav>
+    </form>
+
+    <!-- Финальный экран -->
+    <section class="screen final" id="final" aria-labelledby="finalTitle" hidden>
+      <div class="final__in">
+        <figure class="final__photo" id="finalPhoto">
+          <!-- Замените путь на свою фотографию: файл положите в папку assets -->
+          <img src="assets/photo.jpg" alt="Лисса Миляева, фотограф" id="finalImg" decoding="async">
+          <div class="final__ph" aria-hidden="true">Здесь будет ваша фотография<br><small>assets/photo.jpg</small></div>
+        </figure>
+        <div class="final__text">
+          <h1 class="final__title" id="finalTitle" tabindex="-1">Спасибо!</h1>
+          <p class="final__lead">Я&nbsp;получила ваш бриф и&nbsp;скоро с&nbsp;вами свяжусь</p>
+
+          <div class="final__warn" id="finalWarn" hidden></div>
+
+          <div class="next">
+            <p class="eyebrow">что будет дальше</p>
+            <ul class="next__list">
+              <li><b>В&nbsp;течение 1–2 рабочих дней</b> внимательно прочитаю ответы и&nbsp;напишу вам в&nbsp;удобный мессенджер.</li>
+              <li><b>Предложу формат и&nbsp;смету:</b> место, длительность, команду, сроки обработки.</li>
+              <li><b>Договоримся о&nbsp;дате</b> и&nbsp;вместе соберём образы и&nbsp;референсы, чтобы в&nbsp;день съёмки думать только о&nbsp;кадрах.</li>
+            </ul>
+          </div>
+
+          <div class="final__actions">
+            <a class="cta" href="https://t.me/vasilisa_elkina" target="_blank" rel="noopener">
+              <span class="cta__base" aria-hidden="true"></span>
+              <span class="cta__cap"><span class="cta__face"><span class="cta__label">Написать в&nbsp;Telegram</span><span class="cta__icon" aria-hidden="true">→</span></span></span>
+            </a>
+            <button class="btn-ghost" type="button" id="finalDownload">Скачать копию ответов</button>
+          </div>
+          <button class="link-btn" type="button" id="newBrief">Заполнить новый бриф</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Подвал: контакты и документы с основного сайта -->
+  <footer class="foot">
+    <div class="foot__in">
+      <div class="foot__brand">
+        <a class="brand brand--lg" href="https://enikonov565-cloud.github.io/lisa/">Лисса Миляева</a>
+        <p>Тёплые живые кадры для&nbsp;людей и&nbsp;брендов.</p>
+        <a class="btn-ghost" href="https://t.me/vasilisa_elkina" target="_blank" rel="noopener">Связаться с&nbsp;фотографом</a>
+      </div>
+      <div class="foot__col">
+        <p class="eyebrow">на связи</p>
+        <ul>
+          <li><a href="https://t.me/vasilisa_elkina" target="_blank" rel="noopener">✈ @vasilisa_elkina</a></li>
+          <li><a href="tel:+79000000000">☏ +7 (900) 000-00-00</a></li>
+          <li><a href="mailto:hello@vasilisa-elkina.ru">✉ hello@vasilisa-elkina.ru</a></li>
+        </ul>
+      </div>
+      <div class="foot__col">
+        <p class="eyebrow">документы</p>
+        <ul>
+          <li><a href="https://enikonov565-cloud.github.io/lisa/privacy.html" target="_blank" rel="noopener">Политика обработки персональных данных</a></li>
+          <!-- Когда на основном сайте появятся оферта, согласие и реквизиты ИП — добавьте ссылки сюда:
+          <li><a href="https://enikonov565-cloud.github.io/lisa/offer.html" target="_blank" rel="noopener">Договор оферты</a></li>
+          <li>ИП ФИО · ИНН … · ОГРНИП …</li>
+          -->
+        </ul>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© 2026 Лисса Миляева</span>
+      <a href="https://enikonov565-cloud.github.io/lisa/">← на&nbsp;основной сайт</a>
+    </div>
+  </footer>
+
+  <!-- Уведомления -->
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+    <span class="toast__text" id="toastText"></span>
+    <button class="toast__action" type="button" id="toastAction" hidden></button>
+  </div>
+
+  <!-- Диалог: отправка не настроена или не удалась -->
+  <dialog class="dlg" id="dlg" aria-labelledby="dlgTitle">
+    <div class="dlg__in">
+      <button class="dlg__close" type="button" id="dlgClose" aria-label="Закрыть">×</button>
+      <h2 class="dlg__title" id="dlgTitle"></h2>
+      <p class="dlg__text" id="dlgText"></p>
+      <div class="dlg__actions" id="dlgActions"></div>
+      <p class="dlg__note">Ваши ответы сохранены в&nbsp;этом браузере и&nbsp;никуда не&nbsp;пропадут.</p>
+    </div>
+  </dialog>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
